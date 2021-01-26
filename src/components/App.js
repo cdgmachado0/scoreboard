@@ -44,6 +44,13 @@ class App extends Component {
       }
     }, 0);
   }
+
+  modifyHighest = (num) => {
+    this.setState({
+      highestScore: num
+    });
+  }
+
   
   handleScoreChange = (index, delta) => {
     this.setState( prevState => ({
@@ -70,7 +77,7 @@ class App extends Component {
   handleRemovePlayer = (id) => {
     this.setState( prevState => {
       return {
-        players: prevState.players.filter(p => p.id !== id)
+        players: prevState.players.filter(p => p.id !== id),
       };
     });
   }
@@ -90,7 +97,9 @@ class App extends Component {
             index={index}
             changeScore={this.handleScoreChange}
             removePlayer={this.handleRemovePlayer}
-            highest={this.state.highestScore}     
+            highest={this.state.highestScore}
+            find={this.findHighest}
+            modify={this.modifyHighest}     
           />
         )}
 
