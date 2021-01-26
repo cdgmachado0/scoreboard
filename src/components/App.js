@@ -10,32 +10,43 @@ class App extends Component {
       {
         name: "Guil",
         score: 0,
-        id: 1
+        id: 1,
       },
       {
         name: "Treasure",
         score: 0,
-        id: 2
+        id: 2,
       },
       {
         name: "Ashley",
         score: 0,
-        id: 3
+        id: 3,
       },
       {
         name: "James",
         score: 0,
-        id: 4
+        id: 4,
       }
-    ]
+    ],
+    highestScore: 0
   };
 
   // Player id counter
   prevPlayerId = 4;
+  
 
   handleScoreChange = (index, delta) => {
+    const highest = this.state.players.reduce((highest, player) => {
+      if (player.score > highest ) {
+        return player.score;
+      } else {
+        return highest;
+      }
+    }, 0);
+
     this.setState( prevState => ({
-      score: prevState.players[index].score += delta
+      score: prevState.players[index].score += delta,
+      highestScore: highest
     }));
   }
 
@@ -76,7 +87,8 @@ class App extends Component {
             key={player.id.toString()} 
             index={index}
             changeScore={this.handleScoreChange}
-            removePlayer={this.handleRemovePlayer}           
+            removePlayer={this.handleRemovePlayer}
+            highest={this.state.highestScore}     
           />
         )}
 
