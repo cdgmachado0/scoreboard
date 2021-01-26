@@ -11,6 +11,7 @@ class Player extends PureComponent {
     index: PropTypes.number,
     removePlayer: PropTypes.func,
     changeScore: PropTypes.func,
+    highest: PropTypes.number
   };
 
   render () {
