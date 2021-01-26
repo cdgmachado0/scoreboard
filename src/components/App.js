@@ -33,20 +33,22 @@ class App extends Component {
 
   // Player id counter
   prevPlayerId = 4;
-  
 
-  handleScoreChange = (index, delta) => {
-    const highest = this.state.players.reduce((highest, player) => {
-      if (player.score > highest ) {
-        return player.score;
+  findHighest = () => {
+    return this.state.players.reduce((highest, player) => {
+      let score = player.score;
+      if (score > highest ) {
+        return score;
       } else {
         return highest;
       }
     }, 0);
-
+  }
+  
+  handleScoreChange = (index, delta) => {
     this.setState( prevState => ({
       score: prevState.players[index].score += delta,
-      highestScore: highest
+      highestScore: this.findHighest()
     }));
   }
 
